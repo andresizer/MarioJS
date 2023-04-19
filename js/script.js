@@ -25,7 +25,7 @@ const jump = () => {
 }
 
 
-const loop = setInterval(() => {
+const fimDoJogo = setInterval(() => {
     
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
@@ -58,5 +58,9 @@ const loop = setInterval(() => {
 
 
 document.addEventListener('click', jump);
+
+const restart = () => {
+    
+}
 
     
