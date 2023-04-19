@@ -18,7 +18,7 @@ box-sizing: border-box;
     position: absolute;
     bottom: 0;
     width: 90px;
-    animation: pipe-animation 1.2s infinite linear;
+    animation: pipe-animation 2s infinite linear;
    
 }
 
@@ -51,7 +51,7 @@ box-sizing: border-box;
 }
 
 .mario-gameover {
-    animation: mario-gameover 1.5s linear;
+    animation: mario-gameover 2s linear;
 }
 
 
