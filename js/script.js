@@ -43,7 +43,10 @@ const loop = setInterval(() => {
         mario.style.marginLeft = '50px';
         mario.classList.add('mario-gameover');
 
-       audioGameOver.playedOnce()
+       audioGameOver.play()
+
+       gameover.src = './img/game_over.png';
+       
       
 
         clearInterval();
