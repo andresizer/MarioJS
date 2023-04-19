@@ -43,10 +43,10 @@ box-sizing: border-box;
 }
 
 .gameover {
-    width: 300px;
-    position: relative;
+    position: absolute;
     left: 40%;
     top: 30%;
+    width: 200px;
     animation: gameover-animation 3s linear normal;
 }
 
@@ -103,14 +103,14 @@ box-sizing: border-box;
 
 @keyframes gameover-animation {
 
-    from {
-        top:-150px;
-    }
-
-    to {
-        top: 30%;      
-    }
+  from {
+    width: 0;
+  }
     
+  to {
+
+    width: 200px;
+  }
 }
 
 @keyframes mario-gameover {

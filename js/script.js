@@ -46,6 +46,7 @@ const loop = setInterval(() => {
        audioGameOver.play()
 
        gameover.src = './img/game_over.png';
+    
 
       
 
