@@ -22,6 +22,14 @@ box-sizing: border-box;
    
 }
 
+.pipe-parado {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    
+   
+}
+
 .mario {
     width: 120px;
     position: absolute;
@@ -47,14 +55,38 @@ box-sizing: border-box;
     left: 40%;
     top: 30%;
     width: 200px;
-    animation: gameover-animation 3s linear normal;
+}
+
+.restart {
+    position: absolute;
+    left: 40%;
+    top: 55%;
+    width: 200px;
 }
 
 .mario-gameover {
     animation: mario-gameover 2s linear;
 }
 
+.score {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: aliceblue;
+}
 
+.hscore {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    color: aliceblue;
+}
 
 @keyframes pipe-animation {
     from {
