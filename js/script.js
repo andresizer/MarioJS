@@ -8,13 +8,14 @@ const audioGameOver = new Audio();
     audioGameOver.src = './sound/gameover.mp3';
     
 
-// Define uma variável para contar o tempo
-let tempo = 0;
-
 // Cria um elemento para exibir o tempo decorrido
 let contador = document.createElement("score");
 contador.classList.add('score');
 document.body.appendChild(contador);
+
+
+// Define uma variável para contar o tempo
+let tempo = 0;
 
 // Define a função que será executada a cada segundo
 function atualizarTempo() {
@@ -24,12 +25,17 @@ function atualizarTempo() {
 
 // Define o intervalo de tempo em que a função será executada (1000ms = 1 segundo)
 let intervalo = setInterval(atualizarTempo, 100);
+  
 
 function pararContador() {
-    clearInterval(intervalo); // Para a execução do intervalo de tempo
+    clearInterval(intervalo);// Para a execução do intervalo de tempo
   }
 
+
+    
+
  // Cria o elemento hiscore
+
 let HighScore = document.createElement("hscore");
 HighScore.classList.add('hscore');
 document.body.appendChild(HighScore); 
@@ -62,7 +68,8 @@ function reiniciarJogo() {
 
     // Game over e reset
     gameover.src = '';
-    restart.src = ''; 
+    restart.style.visibility = 'hidden';
+    
 
     // Mario
     mario.src = './img/mario-walking.gif';
@@ -71,9 +78,10 @@ function reiniciarJogo() {
     mario.style.bottom = 0;
     mario.classList.remove('mario-gameover');
 
-    // Contagem
+    //Contagem
 
-    //    HighScore.innerHTML = tempo;
+    reiniciarContador();
+    // HighScore.innerHTML = tempo;
     // contador.innerHTML = tempo; 
      
 
@@ -106,7 +114,8 @@ const fimDoJogo = setInterval(() => {
         audioGameOver.loop = false;
 
         gameover.src = './img/game_over.png';
-        restart.src = './img/restar.jpg';
+        restart.style.visibility = 'visible';
+        
        
         pararContador();
         clearInterval();
@@ -115,7 +124,7 @@ const fimDoJogo = setInterval(() => {
             HighScore.innerHTML = tempo;
         }
        
-        document.addEventListener('keydown', function() {
+        document.addEventListener('', function() {
             reiniciarJogo();
         });
         
@@ -129,4 +138,6 @@ const fimDoJogo = setInterval(() => {
 
 HighScore.innerHTML = "";
 
-document.addEventListener('click', jump);
+
+
+document.addEventListener('keydown', jump);
