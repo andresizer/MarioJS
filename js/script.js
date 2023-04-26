@@ -15,23 +15,29 @@ let contador = document.createElement("score");
 contador.classList.add('score');
 document.body.appendChild(contador);
 
+let tempo = 0;
+let cronometro;
 
+// Funções do cronômetro       
+function timer(){
+    tempo++;
+    contador.innerText = tempo;
+}
 
-        // Define uma variável para contar o tempo
-        let tempo = 0;
+function start(){
+    cronometro = setInterval(() => {
+        timer();
+    }, 100);
+}
 
-        // Define a função que será executada a cada segundo
-        function atualizarTempo() {
-        tempo++; // Incrementa o tempo em 1 segundo
-        contador.innerHTML = tempo; // Atualiza o texto do elemento
-        }
+function pause(){
+    clearInterval(cronometro);
+}
 
-        // Define o intervalo de tempo em que a função será executada (1000ms = 1 segundo) 
-        let intervalo =  setInterval(atualizarTempo, 100 ); 
-    
-        function pararContador(){
-            clearInterval(intervalo);// Para a execução do intervalo de tempo    
-        }
+function reset(){
+    tempo = 0;
+    contador.innerText = tempo;
+}
 
  // Cria o elemento hiscore
 
@@ -39,9 +45,6 @@ let HighScore = document.createElement("hscore");
 HighScore.classList.add('hscore');
 document.body.appendChild(HighScore); 
 HighScore.innerHTML = 0;
-
-
-
 
 // Configuração do pulo 
 
@@ -56,8 +59,7 @@ const jump = () => {
 
 }
 
-
-function reiniciarJogo() {
+  function reiniciarJogo() {
     // Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
    
     // Cano
@@ -78,15 +80,10 @@ function reiniciarJogo() {
     mario.style.bottom = 0;
     mario.classList.remove('mario-gameover');
 
+    reset();
+    start();
 
-
-
-    // HighScore.innerHTML = tempo;
-    // contador.innerHTML = tempo; 
-     
-
-
-  }
+}
 
 // Definições para o fim do jogo 
 
@@ -116,8 +113,9 @@ const fimDoJogo = setInterval(() => {
         gameover.src = './img/game_over.png';
         restart.style.visibility = 'visible';
         
-        pararContador();
         clearInterval();
+        pause();
+        
         // Criando a Highscore 
         if (tempo > HighScore.innerHTML) {
             HighScore.innerHTML = tempo;
@@ -134,9 +132,7 @@ const fimDoJogo = setInterval(() => {
 }, 10);
 
 
-
 HighScore.innerHTML = "";
-
 
 
 document.addEventListener('keydown', jump);
