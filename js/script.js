@@ -4,8 +4,10 @@ const gameover = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 
 
+
 const audioGameOver = new Audio();
     audioGameOver.src = './sound/gameover.mp3';
+    audioGameOver.loop = false;
     
 
 // Cria um elemento para exibir o tempo decorrido
@@ -14,25 +16,22 @@ contador.classList.add('score');
 document.body.appendChild(contador);
 
 
-// Define uma variável para contar o tempo
-let tempo = 0;
 
-// Define a função que será executada a cada segundo
-function atualizarTempo() {
-  tempo++; // Incrementa o tempo em 1 segundo
-  contador.innerHTML = tempo; // Atualiza o texto do elemento
-}
+        // Define uma variável para contar o tempo
+        let tempo = 0;
 
-// Define o intervalo de tempo em que a função será executada (1000ms = 1 segundo)
-let intervalo = setInterval(atualizarTempo, 100);
-  
+        // Define a função que será executada a cada segundo
+        function atualizarTempo() {
+        tempo++; // Incrementa o tempo em 1 segundo
+        contador.innerHTML = tempo; // Atualiza o texto do elemento
+        }
 
-function pararContador() {
-    clearInterval(intervalo);// Para a execução do intervalo de tempo
-  }
-
-
+        // Define o intervalo de tempo em que a função será executada (1000ms = 1 segundo) 
+        let intervalo =  setInterval(atualizarTempo, 100 ); 
     
+        function pararContador(){
+            clearInterval(intervalo);// Para a execução do intervalo de tempo    
+        }
 
  // Cria o elemento hiscore
 
@@ -57,6 +56,7 @@ const jump = () => {
 
 }
 
+
 function reiniciarJogo() {
     // Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
    
@@ -78,9 +78,9 @@ function reiniciarJogo() {
     mario.style.bottom = 0;
     mario.classList.remove('mario-gameover');
 
-    //Contagem
 
-    reiniciarContador();
+
+
     // HighScore.innerHTML = tempo;
     // contador.innerHTML = tempo; 
      
@@ -110,13 +110,12 @@ const fimDoJogo = setInterval(() => {
         mario.style.marginLeft = '50px';
         mario.classList.add('mario-gameover');
 
-        audioGameOver.play()
-        audioGameOver.loop = false;
+        // audioGameOver.play()
+        
 
         gameover.src = './img/game_over.png';
         restart.style.visibility = 'visible';
         
-       
         pararContador();
         clearInterval();
         // Criando a Highscore 
@@ -128,8 +127,8 @@ const fimDoJogo = setInterval(() => {
             reiniciarJogo();
         });
         
-
-
+        
+        
     }
 
 }, 10);
