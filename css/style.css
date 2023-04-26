@@ -73,7 +73,7 @@ box-sizing: border-box;
 }
 
 .restart:hover{
-    background-color: white;
+    background-color: transparent;
     border:10px solid red;
 }
 
