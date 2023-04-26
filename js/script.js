@@ -2,12 +2,22 @@ const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
-
+const inicio = document.querySelector('.inicio');
 
 
 const audioGameOver = new Audio();
     audioGameOver.src = './sound/gameover.mp3';
     audioGameOver.loop = false;
+
+
+
+ function telaInicial(){
+     // Classe pipe removida e adicionada a classe pipe-parado, sem animação 
+     pipe.classList.remove('pipe');
+     pipe.classList.add('pipe-parado'); 
+     pipe.style.right = '130px';
+
+ }   
     
 
 // Cria um elemento para exibir o tempo decorrido
@@ -83,6 +93,8 @@ const jump = () => {
     reset();
     start();
 
+    inicio.style.visibility = 'hidden';
+
 }
 
 // Definições para o fim do jogo 
@@ -120,13 +132,6 @@ const fimDoJogo = setInterval(() => {
         if (tempo > HighScore.innerHTML) {
             HighScore.innerHTML = tempo;
         }
-       
-        document.addEventListener('', function() {
-            reiniciarJogo();
-        });
-        
-        
-        
     }
 
 }, 10);

@@ -15,6 +15,20 @@ box-sizing: border-box;
     background: linear-gradient(rgb(92, 207, 241), white);
 }
 
+.inicio {
+    position: relative;
+    left: 30%;
+    top: 20%;
+    width: 500px;
+    border: 10px solid black;
+    background-color: red;
+    font-size: 40px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
 .pipe {
     position: absolute;
     bottom: 0;
