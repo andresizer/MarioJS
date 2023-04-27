@@ -3,6 +3,7 @@ const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 const inicio = document.querySelector('.inicio');
+const inicio1 = document.querySelector('.inicio1');
 
 
 const audioGameOver = new Audio();
@@ -56,6 +57,11 @@ HighScore.classList.add('hscore');
 document.body.appendChild(HighScore); 
 HighScore.innerHTML = 0;
 
+let HI = document.createElement("HI");
+HI.classList.add('HI');
+document.body.appendChild(HI); 
+
+
 // Configuração do pulo 
 
 const jump = () => {
@@ -92,9 +98,9 @@ const jump = () => {
 
     reset();
     start();
-
+   
     inicio.style.visibility = 'hidden';
-
+    inicio1.style.visibility = 'hidden';
 }
 
 // Definições para o fim do jogo 
@@ -128,8 +134,10 @@ const fimDoJogo = setInterval(() => {
         clearInterval();
         pause();
         
+        
         // Criando a Highscore 
         if (tempo > HighScore.innerHTML) {
+            HI.innerHTML = 'HI ';
             HighScore.innerHTML = tempo;
         }
     }
@@ -138,6 +146,6 @@ const fimDoJogo = setInterval(() => {
 
 
 HighScore.innerHTML = "";
-
+HI.innerHTML = "";
 
 document.addEventListener('keydown', jump);

@@ -10,32 +10,70 @@ box-sizing: border-box;
     height: 500px;
     border-bottom: 15px solid rgb(50, 145, 7);
     margin: 0 auto;
-    position: relative;
+    position: absolute;
     overflow: hidden;
     background: linear-gradient(rgb(92, 207, 241), white);
 }
 
 .inicio {
     position: relative;
-    left: 30%;
-    top: 20%;
-    width: 500px;
+    display: block;
+    margin:auto;
+    width: 80%;
+    top: 50px;
     border: 10px solid black;
     background-color: red;
     font-size: 40px;
     font-family:'Courier New', Courier, monospace;
     font-weight: bold;
     text-align: center;
-    
+    z-index: 1;
+    color: white;
+    visibility: visible;
+    }
+
+.inicio:hover {
+    color:black;
+}    
+
+.inicio1 {
+    position: relative;
+    display: block;
+    margin:auto;
+    width: 80%;
+    top: 50px;
+    border: 10px solid black;
+    background-color: red;
+    font-size: 40px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+    color: white;
+    visibility: visible;
+    }
+
+.inicio1:hover {
+    color:black;
+} 
+
+.typed {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing 1.5s steps(30, end) forwards;
 }
 
 .pipe {
     position: absolute;
     bottom: 0;
     width: 90px;
-    animation: pipe-animation 2s infinite linear;
+    animation: pipe-animation 1.2s infinite linear;
+    
    
 }
+
+
 
 .pipe-parado {
     position: absolute;
@@ -111,7 +149,17 @@ box-sizing: border-box;
     font-size: 20px;
     position: absolute;
     top: 10px;
-    right: 60px;
+    right: 70px;
+    color: aliceblue;
+}
+
+.HI {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 120px;
     color: aliceblue;
 }
 
@@ -179,3 +227,11 @@ box-sizing: border-box;
     }
 }
 
+@keyframes typing {
+    from { 
+        width: 0;
+    }
+    to { 
+        width: 100%;
+    }
+  }
