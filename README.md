@@ -15,7 +15,7 @@ Para jogar basta clonar o repositório e rodar o ` index.html ` no seu navegador
 # :notebook_with_decorative_cover: Telas do jogo e como jogar
 
 ![Interface do Programa](img/marioTelaInicial.png)
-![Interface do Programa](https://j.gifs.com/r2rZkp.gif)
+![Interface do Programa](img/mariointerface.gif)
 
 
 
