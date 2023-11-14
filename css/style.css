@@ -36,27 +36,6 @@ box-sizing: border-box;
     color:black;
 }    
 
-.inicio1 {
-    position: relative;
-    display: block;
-    margin:auto;
-    width: 80%;
-    top: 50px;
-    border: 10px solid black;
-    background-color: red;
-    font-size: 40px;
-    font-family:'Courier New', Courier, monospace;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
-    color: white;
-    visibility: visible;
-    }
-
-.inicio1:hover {
-    color:black;
-} 
-
 .typed {
     overflow: hidden;
     white-space: nowrap;
@@ -68,9 +47,7 @@ box-sizing: border-box;
     position: absolute;
     bottom: 0;
     width: 90px;
-    animation: pipe-animation 1.2s infinite linear;
-    
-   
+    animation: pipe-animation infinite linear;
 }
 
 
@@ -116,6 +93,7 @@ box-sizing: border-box;
     width: 200px;
     height: 60px;
     border: 10px solid black;
+    border-radius: 10px;
     background-color: red;
     font-size: 40px;
     font-family:'Courier New', Courier, monospace;
