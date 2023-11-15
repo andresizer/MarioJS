@@ -50,25 +50,27 @@ box-sizing: border-box;
     animation: pipe-animation infinite linear;
 }
 
-
-
 .pipe-parado {
     position: absolute;
     bottom: 0;
-    width: 90px;
-    
-   
+    width: 90px;  
 }
 
 .mario {
     width: 120px;
     position: absolute;
-    bottom: 0;
-  
+    bottom: 0; 
 }
 
 .jump {
     animation: jump 600ms ease-out;
+}
+
+.star {
+    width: 60px;
+    position: absolute;
+    bottom: 40vh;
+    animation: clouds-animaiton 4s infinite linear, star 600ms infinite ease-out;
 }
 
 .clouds {
@@ -84,6 +86,7 @@ box-sizing: border-box;
     left: 40%;
     top: 30%;
     width: 200px;
+    animation: gameover-animation 2s linear;
 }
 
 .restart {
@@ -183,16 +186,24 @@ box-sizing: border-box;
     }
 }
 
-@keyframes gameover-animation {
+@keyframes star {
 
-  from {
-    width: 0;
-  }
-    
-  to {
+    0% {
+        bottom: 150px;
+    }
 
-    width: 200px;
-  }
+    40%{
+        bottom: 300px;
+    }
+
+  
+    60% {
+        bottom: 300px;
+    }
+
+    100% {
+        bottom: 150px;
+    }
 }
 
 @keyframes mario-gameover {

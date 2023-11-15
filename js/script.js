@@ -3,8 +3,11 @@ const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 const inicio = document.querySelectorAll('.inicio');
+const star = document.querySelector('.star');
+
+
 let audioPlayed = false; 
-let duration = 2; 
+let duration; 
 
 
 
@@ -117,9 +120,33 @@ function reiniciarJogo() {
     audioPlayed = false; // Atualiza a variável de controle
 
     // Duração da animação
-    duration = 5;
+    duration = 2;
 
+    // Estrela
+    function ativarEstrela() {
+        star.style.display = 'block';
+        setTimeout(() => {
+            star.style.display = 'none';
+        }, 15000);
+    }
+
+    ativarEstrela();
+    setInterval(ativarEstrela, 15000);
 }
+
+// Definiçoes para ativar a estrela
+
+const ativarEstrela = setInterval(() => {
+    const starPosition = star.offsetLeft;
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+
+    if (starPosition <= 120 && starPosition > 0 && marioPosition < 90 && star.style.display === 'block') {
+        star.style.display = 'none';
+        console.log('peguei');
+        mario.src = './img/mario-walking.gif';
+    }
+}, 10);
+
 
 // Definições para o fim do jogo 
 
