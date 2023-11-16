@@ -1,3 +1,4 @@
+
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
@@ -8,7 +9,6 @@ const star = document.querySelector('.star');
 
 let audioPlayed = false; 
 let duration; 
-
 
 
 // Musica de fundo
@@ -86,8 +86,8 @@ const jump = () => {
     }, 500);
 }
 
+// Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
 function reiniciarJogo() {
-    // Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
 
     // Cano
     // Estilo left é resetado, a classe pipe-parado é removida e a classe pipe é adicionada novamente
@@ -99,7 +99,6 @@ function reiniciarJogo() {
     gameover.src = '';
     restart.style.visibility = 'hidden';
 
-
     // Mario
     mario.src = './img/mario-walking.gif';
     mario.style.width = '';
@@ -110,6 +109,7 @@ function reiniciarJogo() {
     reset();
     start();
 
+    // Esconde a tela inicial
     inicio.forEach(element => {
         element.style.visibility = 'hidden';
     });
@@ -203,6 +203,8 @@ document.addEventListener('keydown', function(event) {
 });
 
 
+//Função para aumentar a velocidade do cano
+
 let lastTimestamp = null;
 
 function updateAnimationDuration(timestamp) {
@@ -213,7 +215,7 @@ function updateAnimationDuration(timestamp) {
     const elapsedMilliseconds = timestamp - lastTimestamp;
     const elapsedSeconds = elapsedMilliseconds / 1000;
 
-    if (tempo % 0.5 === 0 && duration > 2) {
+    if (tempo % 5 === 0 && duration > 1) {
         duration -= 0.1 * elapsedSeconds;
         console.log(tempo);
         console.log(duration);
@@ -227,3 +229,8 @@ function updateAnimationDuration(timestamp) {
 }
 
 requestAnimationFrame(updateAnimationDuration);
+
+
+
+
+  

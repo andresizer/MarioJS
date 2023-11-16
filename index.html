@@ -14,15 +14,34 @@
     
     <audio src="./sound/theme.mp3"></audio>
 
-   <div class="game-board">
-    <div class="inicio">
-        <div class="typed">Mario Jump Game<br>Seja bem vindo<br>Aperte qualquer tecla para pular!</div>
-    </div>
+    <div class="game-board">
+
+        <div class="inicio">
+            <div class="typed" onclick="reiniciarJogo()">Mario Jump Game<br>Seja bem vindo<br>Clique aqui para começar!</div>
+        </div>
     <br>
-    <div class="inicio" >
-        <div  class="typed" onclick="reiniciarJogo()">Clique aqui para começar!</div>
-    </div>
+        
     
+    <div class="inicio" style="font-size: 1rem">
+        Áudio:
+        <label class="toggle">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        
+        <label class="toggleRadio">
+            Dificuldade:
+            <label for="easy">Fácil</label>
+            <input type="radio" name="difficulty" value="easy" id="easy" checked>
+            <label for="medium">Médio</label>
+            <input type="radio" name="difficulty" value="medium" id="medium"> 
+            <label for="hard">Difícil</label>
+            <input type="radio" name="difficulty" value="hard" id="hard"> 
+            <!-- <span class="slider round"></span> -->
+        </label>
+    </div>
+
+
     <img src="./img/pipe.png" alt="pipe" class="pipe" id ="pipe">
     <img src="./img/mario-walking.gif" alt="mario" class="mario">
     <img src="./img/cloud1.png" alt="nuvens" class="clouds">
@@ -30,5 +49,6 @@
     <img src="" alt="" class="gameover">
     <div class="restart" onclick="reiniciarJogo()">RESTART</div>
 
+</div>
 </body>
 </html>
