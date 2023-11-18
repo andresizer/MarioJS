@@ -13,6 +13,7 @@ box-sizing: border-box;
     position: absolute;
     overflow: hidden;
     background: linear-gradient(rgb(92, 207, 241), white);
+    /* background: linear-gradient(rgba(241, 92, 231, 0.875), white); */
 }
 
 .inicio {
@@ -69,7 +70,7 @@ box-sizing: border-box;
 }
 
 .jump {
-    animation: jump 600ms ease-out;
+    animation: jump 700ms ease-out;
 }
 
 .star {
@@ -154,8 +155,8 @@ box-sizing: border-box;
 .toggle {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 30px;
+    height: 18px;
   }
   
   /* Hide default HTML checkbox */
@@ -181,10 +182,10 @@ box-sizing: border-box;
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 12px;
+    width: 12px;
     left: 4px;
-    bottom: 4px;
+    bottom: 3px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -199,9 +200,9 @@ box-sizing: border-box;
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    transform: translateX(10px);
   }
   
   /* Rounded sliders */
@@ -213,6 +214,44 @@ box-sizing: border-box;
     border-radius: 50%;
   }
   
+  .inBox {
+    display: flex;
+    flex-direction: column;
+    padding: 10px; 
+    border: 4px solid rgb(113, 113, 113);
+    border-radius: 34px;
+    background-color: seashell;
+    color: black;
+  }
+
+  .audio {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .volume-control {
+    text-align: center;
+  }
+  
+  input[type="range"] {
+    width: 50px;
+  }
+  
+  #volumeValue {
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .seletor {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 10px;
+  }
 @keyframes pipe-animation {
     from {
         right: -80px;

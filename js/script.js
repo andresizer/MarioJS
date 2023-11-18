@@ -1,14 +1,25 @@
 
+// Variáveis
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
 const restart = document.querySelector('.restart');
 const inicio = document.querySelectorAll('.inicio');
 const star = document.querySelector('.star');
+const jumpDef = document.querySelector('.jump');
 
+const checkAudioTheme = document.querySelector('.checkaudiotheme');
+const checkAudioJump = document.querySelector('.checkaudiojump');
+const checkAudioGameOver = document.querySelector('.checkaudiogameover');
+
+const radioEasy = document.querySelector('#easy');
+const radioMedium = document.querySelector('#medium');
+const radioHard = document.querySelector('#hard');
 
 let audioPlayed = false; 
 let duration; 
+
+
 
 
 // Musica de fundo
@@ -76,14 +87,17 @@ document.body.appendChild(HI);
 // Configuração do pulo 
 const jump = () => {
     mario.classList.add('jump');
-    audioJump.play();
-    console.log('pulei');
-
+    
+    if (checkAudioJump.checked) {
+        audioJump.volume = 0.15;
+        audioJump.play();
+    }
+    
     setTimeout(() => {
         
         mario.classList.remove('jump');
 
-    }, 500);
+    }, 600);
 }
 
 // Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
@@ -115,14 +129,30 @@ function reiniciarJogo() {
     });
 
     // Musica
-    themeAudio.currentTime = 0; // Volta para o início
-    themeAudio.play();
-    audioPlayed = false; // Atualiza a variável de controle
+    if (checkAudioTheme.checked) {
+        themeAudio.currentTime = 0; // Volta para o início
+        themeAudio.volume = 0.3;
+        themeAudio.play();
+        audioPlayed = false; // Atualiza a variável de controle
+    }
 
     // Duração da animação
-    duration = 2;
+
+    if (radioEasy.checked) {
+        duration = 3.5;
+    }
+
+    if (radioMedium.checked) {
+        duration = 2.6;
+    }
+
+    if (radioHard.checked) {
+        duration = 1.8;
+    }
 
     // Estrela
+    modoEstrela();
+
     function ativarEstrela() {
         star.style.display = 'block';
         setTimeout(() => {
@@ -131,21 +161,34 @@ function reiniciarJogo() {
     }
 
     ativarEstrela();
-    setInterval(ativarEstrela, 15000);
+    setInterval(ativarEstrela, 25000);
 }
 
 // Definiçoes para ativar a estrela
+    
 
-const ativarEstrela = setInterval(() => {
-    const starPosition = star.offsetLeft;
+function modoEstrela() {
+    setInterval(() => { 
+
+    const starPositionLeft = star.offsetLeft;
+    const starPositionBottom = +window.getComputedStyle(star).bottom.replace('px', '');
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
-
-    if (starPosition <= 120 && starPosition > 0 && marioPosition < 90 && star.style.display === 'block') {
+        
+    if (starPositionLeft <= 120 && starPositionLeft > 0 && marioPosition > 150 && star.style.display === 'block') {
+        console.log('estrela ativada');
         star.style.display = 'none';
-        console.log('peguei');
-        mario.src = './img/mario-walking.gif';
+        mario.src = './img/small-mario-running.gif';
+        // duration = 1;
     }
-}, 10);
+    setTimeout(function() {
+        console.log('estrela desativada');
+    }, 10000);
+
+    }, 10);
+  
+}
+
+
 
 
 // Definições para o fim do jogo 
@@ -175,13 +218,14 @@ const fimDoJogo = setInterval(() => {
         clearInterval();
         pause();
 
-        if (!audioPlayed) {
-            audioGameOver.play();
-            audioGameOver.loop = false;
-            audioPlayed = true; // Atualiza a variável de controle
-            console.log('gameover');
+        if (checkAudioGameOver.checked) {
+            if (!audioPlayed) {
+                audioGameOver.volume = 0.3;
+                audioGameOver.play();
+                audioGameOver.loop = false;
+                audioPlayed = true; // Atualiza a variável de controle
+            }
         }
-
         themeAudio.pause();
         
         // Criando a Highscore 
@@ -211,11 +255,10 @@ function updateAnimationDuration(timestamp) {
     if (!lastTimestamp) {
         lastTimestamp = timestamp;
     }
-    console.log(duration);
     const elapsedMilliseconds = timestamp - lastTimestamp;
     const elapsedSeconds = elapsedMilliseconds / 1000;
 
-    if (tempo % 5 === 0 && duration > 1) {
+    if (tempo % 500 === 0 && duration > 1) {
         duration -= 0.1 * elapsedSeconds;
         console.log(tempo);
         console.log(duration);

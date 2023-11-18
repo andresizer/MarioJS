@@ -23,22 +23,44 @@
         
     
     <div class="inicio" style="font-size: 1rem">
-        Áudio:
-        <label class="toggle">
-            <input type="checkbox">
-            <span class="slider round"></span>
-        </label>
+        <div class="inBox">
+            <div class="audio">
+                <div class="typed">Ativar música tema:</div>
+                <label class="toggle">
+                    <input type="checkbox" class="checkaudiotheme" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="audio">
+                <div class="typed">Ativar som do pulo:</div>
+                <label class="toggle">
+                    <input type="checkbox" class="checkaudiojump" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="audio">
+                <div class="typed">Ativar som do game over:</div>
+                <label class="toggle">
+                    <input type="checkbox" class="checkaudiogameover" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>   
+        </div>
+
+        <div class="inBox">
+            <div class="typed" style="font-size: 1.5rem">Escolha a dificuldade do jogo:</div>
+            <div class="seletor">
+                <label for="easy">Fácil</label>
+                <input type="radio" name="difficulty" value="easy" id="easy" checked>
+                <label for="medium">Médio</label>
+                <input type="radio" name="difficulty" value="medium" id="medium"> 
+                <label for="hard">Difícil</label>
+                <input type="radio" name="difficulty" value="hard" id="hard"> 
+            </div>
+        </div>
+            
+            
         
-        <label class="toggleRadio">
-            Dificuldade:
-            <label for="easy">Fácil</label>
-            <input type="radio" name="difficulty" value="easy" id="easy" checked>
-            <label for="medium">Médio</label>
-            <input type="radio" name="difficulty" value="medium" id="medium"> 
-            <label for="hard">Difícil</label>
-            <input type="radio" name="difficulty" value="hard" id="hard"> 
-            <!-- <span class="slider round"></span> -->
-        </label>
     </div>
 
 
