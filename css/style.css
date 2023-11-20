@@ -13,7 +13,19 @@ box-sizing: border-box;
     position: absolute;
     overflow: hidden;
     background: linear-gradient(rgb(92, 207, 241), white);
-    /* background: linear-gradient(rgba(241, 92, 231, 0.875), white); */
+}
+
+.contador-estrela {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
 }
 
 .inicio {

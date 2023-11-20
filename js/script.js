@@ -1,5 +1,6 @@
 
 // Variáveis
+const gameBoard = document.querySelector('.game-board');
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const gameover = document.querySelector('.gameover');
@@ -16,6 +17,10 @@ const radioEasy = document.querySelector('#easy');
 const radioMedium = document.querySelector('#medium');
 const radioHard = document.querySelector('#hard');
 
+const backgroundEstrela = 'linear-gradient(rgba(241, 92, 231, 0.875), white)';
+const backgroundOriginal = 'linear-gradient(rgb(92, 207, 241), white)';
+
+let estrelaAtiva = false;
 let audioPlayed = false; 
 let duration; 
 
@@ -29,12 +34,30 @@ themeAudio.loop = true;
 
 // Som do game over
 const audioGameOver = new Audio();
-audioGameOver.src = './sound/gameover.mp3';
+audioGameOver.src = './sound/playerdown.mp3';
 
 // Som do pulo
 const audioJump = new Audio();
 audioJump.src = './sound/jump.mp3';
 
+// Som da estrela
+const audioStar = new Audio();
+audioStar.src = './sound/star.mp3';
+
+// Função para alterar o background
+function alterarBackground() {   
+    if (!estrelaAtiva) {
+        return;
+    }
+    
+    setTimeout(() => {
+         gameBoard.style.background = backgroundEstrela;
+         setTimeout(() => {
+             gameBoard.style.background = backgroundOriginal;
+             alterarBackground();
+         }, 400);
+    }, 40);
+ }
 
  function telaInicial(){
      // Classe pipe removida e adicionada a classe pipe-parado, sem animação 
@@ -52,17 +75,29 @@ document.body.appendChild(contador);
 
 let tempo = 0.1;
 let cronometro;
+let velocidade = 100; // 100 milissegundos
 
 // Funções do cronômetro       
 function timer(){
     tempo++;
     contador.innerText = tempo;
+
+    // Sua condição para ajustar a velocidade aqui
+    if (estrelaAtiva) {
+        velocidade = 50;  // por exemplo, diminui a velocidade para 50 milissegundos
+    } else {
+        velocidade = 100;  // volta à velocidade padrão
+    }
+
+    clearInterval(cronometro);
+    cronometro = setInterval(timer, velocidade);
+
 }
 
 function start(){
-    cronometro = setInterval(() => {
-        timer();
-    }, 100);
+        cronometro = setInterval(() => {
+            timer();
+        }, velocidade);
 }
 
 function pause(){
@@ -89,7 +124,7 @@ const jump = () => {
     mario.classList.add('jump');
     
     if (checkAudioJump.checked) {
-        audioJump.volume = 0.15;
+        audioJump.volume = 0.08;
         audioJump.play();
     }
     
@@ -100,7 +135,7 @@ const jump = () => {
     }, 600);
 }
 
-// Reiniciar a contagem, imagem de game over e reset saírem da tela, mario voltar a caminhar e cano voltar a animação
+// Reiniciar o jogo
 function reiniciarJogo() {
 
     // Cano
@@ -131,7 +166,6 @@ function reiniciarJogo() {
     // Musica
     if (checkAudioTheme.checked) {
         themeAudio.currentTime = 0; // Volta para o início
-        themeAudio.volume = 0.3;
         themeAudio.play();
         audioPlayed = false; // Atualiza a variável de controle
     }
@@ -164,9 +198,8 @@ function reiniciarJogo() {
     setInterval(ativarEstrela, 25000);
 }
 
-// Definiçoes para ativar a estrela
-    
 
+// Definiçoes para ativar a estrela  
 function modoEstrela() {
     setInterval(() => { 
 
@@ -175,17 +208,64 @@ function modoEstrela() {
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
         
     if (starPositionLeft <= 120 && starPositionLeft > 0 && marioPosition > 150 && star.style.display === 'block') {
-        console.log('estrela ativada');
+        estrelaAtiva = true;
         star.style.display = 'none';
-        mario.src = './img/small-mario-running.gif';
-        // duration = 1;
-    }
-    setTimeout(function() {
-        console.log('estrela desativada');
-    }, 10000);
+        
+        if (checkAudioTheme.checked) {
+            themeAudio.pause();
+            
+            audioStar.currentTime = 0; // Volta para o início
+            audioStar.volume = 0.4;
+            audioStar.play();
+            audioPlayed = false; // Atualiza a variável de controle
+        }
+        
+        alterarBackground(); // Altera o background
 
-    }, 10);
+        timer(); // Aumenta a velocidade do cronômetro
+
+        let duracaoEstrela = 9;
+        let contadorEstrela = document.querySelector('.contador-estrela');
+        
+        function atualizarContador() {
+            contadorEstrela.innerHTML = duracaoEstrela;
+            duracaoEstrela--;
+        
+            if (duracaoEstrela < 0) {
+                clearInterval(intervalID);  // para o contador quando a contagem regressiva chegar a 0
+                contadorEstrela.innerHTML = '';
+            }
+        }
+        
+        // Atualiza o contador a cada segundo (1000 milissegundos)
+        let intervalID = setInterval(atualizarContador, 1000);
+        
+
+
+        
+        
+        setTimeout(() => {
+            estrelaAtiva = false;
+            if (checkAudioTheme.checked) {
+                audioStar.pause();
+                themeAudio.play();
+            }
+            
+            mario.src = './img/mario-walking.gif';
+            gameBoard.style.background = backgroundOriginal;
+
+            timer(); // Volta a velocidade do cronômetro
+            
+        }, 10000);
+        
+    }
+
+
+    }, 1);
   
+
+
+
 }
 
 
@@ -198,6 +278,10 @@ const fimDoJogo = setInterval(() => {
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
    
+    if (estrelaAtiva) {    
+        return;
+    }
+
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 90) {
 
         // Classe pipe removida e adicionada a classe pipe-parado, sem animação 
@@ -227,6 +311,7 @@ const fimDoJogo = setInterval(() => {
             }
         }
         themeAudio.pause();
+        audioStar.pause();
         
         // Criando a Highscore 
         if (tempo > HighScore.innerHTML) {
@@ -258,8 +343,8 @@ function updateAnimationDuration(timestamp) {
     const elapsedMilliseconds = timestamp - lastTimestamp;
     const elapsedSeconds = elapsedMilliseconds / 1000;
 
-    if (tempo % 500 === 0 && duration > 1) {
-        duration -= 0.1 * elapsedSeconds;
+    if (tempo % 1 === 0 && duration > 1) {
+        duration -= 0.001 * elapsedSeconds;
         console.log(tempo);
         console.log(duration);
     }
