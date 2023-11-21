@@ -345,8 +345,8 @@ function updateAnimationDuration(timestamp) {
     const elapsedMilliseconds = timestamp - lastTimestamp;
     const elapsedSeconds = elapsedMilliseconds / 1000;
 
-    if (tempo % 1 === 0 && duration > 1) {
-        duration -= 0.001 * elapsedSeconds;
+    if (tempo % 2 === 0 && duration > 1) {
+        duration -= 0.01 * elapsedSeconds;
         console.log(tempo);
         console.log(duration);
     }
