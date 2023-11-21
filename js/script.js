@@ -17,12 +17,31 @@ const radioEasy = document.querySelector('#easy');
 const radioMedium = document.querySelector('#medium');
 const radioHard = document.querySelector('#hard');
 
+const radioMario = document.querySelector('#mario');
+const radioLuigi = document.querySelector('#luigi');
+
 const backgroundEstrela = 'linear-gradient(rgba(241, 92, 231, 0.875), white)';
 const backgroundOriginal = 'linear-gradient(rgb(92, 207, 241), white)';
 
 let estrelaAtiva = false;
 let audioPlayed = false; 
 let duration; 
+
+function mudarPersonagem() {
+        mario.style.width = '';
+        mario.style.marginLeft = '';
+        mario.style.bottom = 0;
+        mario.classList.remove('mario-gameover');
+    if (radioMario.checked) {
+        mario.src = './img/mario-walking.gif';
+    }else if (radioLuigi.checked) {
+        mario.src = './img/luigi.gif';
+    }
+}
+
+// Adiciona um evento de mudança para os radio buttons
+radioMario.addEventListener('change', mudarPersonagem);
+radioLuigi.addEventListener('change', mudarPersonagem);
 
 
 
@@ -55,8 +74,8 @@ function alterarBackground() {
          setTimeout(() => {
              gameBoard.style.background = backgroundOriginal;
              alterarBackground();
-         }, 400);
-    }, 40);
+         }, 100);
+    }, 100);
  }
 
  function telaInicial(){
@@ -148,12 +167,7 @@ function reiniciarJogo() {
     gameover.src = '';
     restart.style.visibility = 'hidden';
 
-    // Mario
-    mario.src = './img/mario-walking.gif';
-    mario.style.width = '';
-    mario.style.marginLeft = '';
-    mario.style.bottom = 0;
-    mario.classList.remove('mario-gameover');
+    mudarPersonagem();
 
     reset();
     start();
@@ -204,7 +218,6 @@ function modoEstrela() {
     setInterval(() => { 
 
     const starPositionLeft = star.offsetLeft;
-    const starPositionBottom = +window.getComputedStyle(star).bottom.replace('px', '');
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
         
     if (starPositionLeft <= 120 && starPositionLeft > 0 && marioPosition > 150 && star.style.display === 'block') {
@@ -238,12 +251,8 @@ function modoEstrela() {
         }
         
         // Atualiza o contador a cada segundo (1000 milissegundos)
-        let intervalID = setInterval(atualizarContador, 1000);
-        
-
-
-        
-        
+        let intervalID = setInterval(atualizarContador, 1000);        
+ 
         setTimeout(() => {
             estrelaAtiva = false;
             if (checkAudioTheme.checked) {
@@ -251,28 +260,14 @@ function modoEstrela() {
                 themeAudio.play();
             }
             
-            mario.src = './img/mario-walking.gif';
             gameBoard.style.background = backgroundOriginal;
-
             timer(); // Volta a velocidade do cronômetro
-            
-        }, 10000);
-        
+        }, 10000);   
     }
-
-
-    }, 1);
-  
-
-
-
+    }, 1);  
 }
 
-
-
-
 // Definições para o fim do jogo 
-
 const fimDoJogo = setInterval(() => {
  
     const pipePosition = pipe.offsetLeft;
@@ -330,6 +325,13 @@ document.addEventListener('keydown', function(event) {
         jump()
     }
 });
+
+
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('game-board')) {
+            jump();
+        }
+    });
 
 
 //Função para aumentar a velocidade do cano
